@@ -1,5 +1,5 @@
 # MyQem
-Mesh simplification using Quadric Error Metrics written in C#/.NET Core
+Mesh simplification using Quadric Error Metrics written in C#/.NET.
 
 ## Purpose
 
@@ -25,7 +25,10 @@ https://www.nuget.org/packages/qem/
 For offline installation the nuget package is also included as a release.
 
 #### Additional information
-This should work cross-platform on any .NET Core capable OS but was only tested on Windows 10
+Compiled and tested using:
+- Visual Studio 2019 v16
+- .NET Framework v4.6.1
+- Windows 10
 
 ## Usage
 
