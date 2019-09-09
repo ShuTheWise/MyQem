@@ -1,0 +1,8 @@
+{
+  "profiles": {
+    "qem": {
+      "commandName": "Project",
+      "commandLineArgs": "C:\\Users\\Wookie\\Documents\\AALL_MGR\\qemTest\\dragon.stl C:\\Users\\Wookie\\Documents\\AALL_MGR\\qemTest\\out_dragon.stl"
+    }
+  }
+}
