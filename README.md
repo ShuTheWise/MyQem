@@ -35,11 +35,11 @@ In the terminal type:
 
 or 
 
-`qem <input file path> <output file path> -t <target triangle>`
+`qem <input file path> <output file path> -t <target triangle count>`
 
 - input and output files should have .stl extension
 - quality has to be between 0.0 and 1.0
-- tris count of the target model cannot execced input model's tris count
+- target tris count cannot exceed input model's tris count
 
 For more information type:
 
