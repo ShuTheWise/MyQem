@@ -1,6 +1,8 @@
 # MyQem
 Mesh simplification using Quadric Error Metrics written in C#/.NET.
 
+For more information about the algoritm check out the paper https://www.cs.cmu.edu/~./garland/Papers/quadrics.pdf
+
 ## Purpose
 
 This program can be used to simplify a triangular mesh to target number of triangles or using quality multiplier, the relationship is as follows:
