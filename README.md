@@ -12,7 +12,7 @@ Input mesh has to be in STL file format (.stl). Output mesh will also be in that
 ## Installation
 This is a dotnet global tool, for installation simply type in terminal:
 
-'dotnet tool install --global qem'
+`dotnet tool install --global qem`
 
 You need to have .NET Core installed on your computer for this to work: https://dotnet.microsoft.com/download
 
