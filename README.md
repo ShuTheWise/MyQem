@@ -5,14 +5,14 @@ Mesh simplification using Quadric Error Metrics written in C#/.NET Core
 
 This program can be used to simplify a triangular mesh to target number of triangles or using quality multiplier, the relationship is as follows:
 
-`Quality * Input model tris count = Target tris count` 
+'Quality * Input model tris count = Target tris count'
 
 Input mesh has to be in STL file format (.stl). Output mesh will also be in that format.
 
-## Instalation
+## Installation
 This is a dotnet global tool, for installation simply type in terminal:
 
-`dotnet tool install --global qem`
+'dotnet tool install --global qem'
 
 You need to have .NET Core installed on your computer for this to work: https://dotnet.microsoft.com/download
 
@@ -31,17 +31,20 @@ This should work cross-platform on any .NET Core capable OS but was only tested 
 
 In the terminal type:
 
-`qem <input file path> <output file path> -q <quality>`
+'qem <input file path> <output file path> -q <quality>'
 
-or 
+or
 
-`qem <input file path> <output file path> -t <target triangle count>`
+'qem <input file path> <output file path> -t <target triangle count>'
 
 - input and output files should have .stl extension
 - quality has to be between 0.0 and 1.0
 - target tris count cannot exceed input model's tris count
 
+If you do not specify neither quality nor target triangle count, the original model will be simplified by a quality factor of 0.5:
+
+'qem <input file path> <output file path>'
+
 For more information type:
 
-`qem help`
-
+'qem help'
