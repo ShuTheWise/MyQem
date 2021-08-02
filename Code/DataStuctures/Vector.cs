@@ -3,20 +3,20 @@ namespace qem
 {
     public struct Vector
     {
-        public double X, Y, Z;
+        public float X, Y, Z;
 
-        public Vector(double x, double y, double z)
+        public Vector(float x, float y, float z)
         {
             X = x;
             Y = y;
             Z = z;
         }
 
-        public double Length => Convert.ToDouble(Math.Sqrt(X * X + Y * Y + Z * Z));
+        public float Length => (float)(Math.Sqrt(X * X + Y * Y + Z * Z));
         public static Vector operator +(Vector a, Vector b) => new Vector(a.X + b.X, a.Y + b.Y, a.Z + b.Z);
         public static Vector operator -(Vector a, Vector b) => new Vector(a.X - b.X, a.Y - b.Y, a.Z - b.Z);
-        public static Vector operator *(Vector a, double f) => new Vector(a.X * f, a.Y * f, a.Z * f);
-        public static Vector operator /(Vector a, double f) => new Vector(a.X / f, a.Y / f, a.Z / f);
+        public static Vector operator *(Vector a, float f) => new Vector(a.X * f, a.Y * f, a.Z * f);
+        public static Vector operator /(Vector a, float f) => new Vector(a.X / f, a.Y / f, a.Z / f);
 
 
         public static bool operator ==(Vector a, Vector b) => Equals(a, b);
@@ -24,7 +24,7 @@ namespace qem
         public static bool operator >(Vector a, Vector b) => a.Less(b);
         public static bool operator <(Vector a, Vector b) => !a.Less(b);
 
-        public static Vector Lerp(Vector a, Vector b, double frac)
+        public static Vector Lerp(Vector a, Vector b, float frac)
         {
             var x = Lerp(a.X, b.X, frac);
             var y = Lerp(a.Y, b.Y, frac);
@@ -32,7 +32,7 @@ namespace qem
             return new Vector(x, y, z);
         }
 
-        public static double Lerp(double firstFloat, double secondFloat, double by)
+        public static float Lerp(float firstFloat, float secondFloat, float by)
         {
             return firstFloat * (1 - by) + secondFloat * by;
         }
@@ -61,9 +61,9 @@ namespace qem
             return Z < b.Z;
         }
 
-        public static bool nearlyEqual(double a, double b)
+        public static bool nearlyEqual(float a, float b)
         {
-            var epsilon = double.Epsilon;
+            var epsilon = float.Epsilon;
             var absA = Math.Abs(a);
             var absB = Math.Abs(b);
             var diff = Math.Abs(a - b);
@@ -72,11 +72,11 @@ namespace qem
             { // shortcut, handles infinities
                 return true;
             }
-            else if (a == 0 || b == 0 || diff < double.MinValue)
+            else if (a == 0 || b == 0 || diff < float.MinValue)
             {
                 // a or b is zero or both are extremely close to it
                 // relative error is less meaningful here
-                return diff < (epsilon * double.MaxValue);
+                return diff < (epsilon * float.MaxValue);
             }
             else
             { // use relative error
@@ -89,7 +89,7 @@ namespace qem
             return $"({X};{Y};{Z})";
         }
 
-        public Vector Normalize() => this * (1d / Length);
+        public Vector Normalize() => this * (1f / Length);
     }
 
     public static class VectorEx
@@ -103,6 +103,6 @@ namespace qem
             return new Vector(x, y, z);
         }
 
-        public static double Dot(this Vector a, Vector b) => a.X * b.X + a.Y * b.Y + a.Z * b.Z;
+        public static float Dot(this Vector a, Vector b) => a.X * b.X + a.Y * b.Y + a.Z * b.Z;
     }
 }

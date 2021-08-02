@@ -7,7 +7,7 @@ namespace qem
     public class Pair
     {
         public Vertex A, B;
-        public double CachedError;
+        public float CachedError;
         public bool Removed;
 
         public Pair(Vertex a, Vertex b)
@@ -29,7 +29,7 @@ namespace qem
             if (Math.Abs(q.Determinant()) > 1e-3)
             {
                 var v = q.QuadricVector();
-                if (!double.IsNaN(v.X) && !double.IsNaN(v.Y) && !double.IsNaN(v.Z))
+                if (!float.IsNaN(v.X) && !float.IsNaN(v.Y) && !float.IsNaN(v.Z))
                     return v;
             }
 
@@ -55,7 +55,7 @@ namespace qem
             return bestV;
         }
 
-        public double Error()
+        public float Error()
         {
             if (CachedError < 0)
             {
