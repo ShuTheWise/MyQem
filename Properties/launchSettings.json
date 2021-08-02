@@ -1,7 +1,8 @@
 {
   "profiles": {
     "qem": {
-      "commandName": "Project"
+      "commandName": "Project",
+      "commandLineArgs": "E:\\Perso\\data\\qem\\ste5.stl E:\\Perso\\data\\qem\\ste_out.stl  -t 2000"
     }
   }
 }

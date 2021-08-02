@@ -69,7 +69,7 @@ namespace qem
             return A.Quadric.Add(B.Quadric);
         }
 
-        public struct Key
+        public record Key
         {
             public Vector A, B;
             public Key(Vector a, Vector b)

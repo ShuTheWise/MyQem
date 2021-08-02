@@ -21,7 +21,7 @@ namespace qem
         public static Mesh Simplify(this Mesh originalMesh, int targetCount)
         {
             // gather distinct vertices
-            Dictionary<Vector, Vertex> vectorVertex = new Dictionary<Vector, Vertex>();
+            Dictionary<Vector, Vertex> vectorVertex = new Dictionary<Vector, Vertex>(originalMesh.vertexCount);
 
             foreach (Triangle t in originalMesh.tris)
             {
@@ -45,7 +45,7 @@ namespace qem
             }
 
             //vertex -> face map
-            Dictionary<Vertex, List<Face>> vertexFaces = new Dictionary<Vertex, List<Face>>();
+            Dictionary<Vertex, List<Face>> vertexFaces = new Dictionary<Vertex, List<Face>>(originalMesh.vertexCount);
             foreach (Triangle t in originalMesh.tris)
             {
                 Vertex v1 = vectorVertex[t.v1];
@@ -61,7 +61,7 @@ namespace qem
 
             System.Diagnostics.Stopwatch sw = System.Diagnostics.Stopwatch.StartNew();
             //gather distinct pairs
-            Dictionary<Pair.Key, Pair> pairs = new Dictionary<Pair.Key, Pair>();
+            Dictionary<Pair.Key, Pair> pairs = new Dictionary<Pair.Key, Pair>(originalMesh.trisCount);
             foreach (Triangle t in originalMesh.tris)
             {
                 Vertex v1 = vectorVertex[t.v1];
@@ -77,7 +77,7 @@ namespace qem
             }
             Console.WriteLine($"total: {sw.ElapsedMilliseconds}");
 
-            Dictionary<Vertex, List<Pair>> vertexPairs = new Dictionary<Vertex, List<Pair>>();
+            Dictionary<Vertex, List<Pair>> vertexPairs = new Dictionary<Vertex, List<Pair>>(originalMesh.vertexCount);
 
             foreach (KeyValuePair<Pair.Key, Pair> p in pairs)
             {
