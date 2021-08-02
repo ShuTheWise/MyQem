@@ -1,10 +1,12 @@
+using System.Numerics;
+
 namespace qem
 {
-    public struct Triangle
+    public record Triangle
     {
-        public Vector v1, v2, v3;
+        public Vector3 v1, v2, v3;
 
-        public Triangle(Vector v1, Vector v2, Vector v3)
+        public Triangle(Vector3 v1, Vector3 v2, Vector3 v3)
         {
             this.v1 = v1;
             this.v2 = v2;
@@ -31,7 +33,7 @@ namespace qem
             );
         }
 
-        public Vector Normal()
+        public Vector3 Normal()
         {
             var e1 = v2 - v1;
             var e2 = v3 - v2;

@@ -1,3 +1,5 @@
+using System.Numerics;
+
 namespace qem
 {
     public class Face
@@ -27,7 +29,7 @@ namespace qem
 
         public override string ToString()
         {
-            return $"V1: {V1.Vector} V2: {V2.Vector} V3: {V3.Vector}";
+            return $"V1: {V1.Vector3} V2: {V2.Vector3} V3: {V3.Vector3}";
         }
 
         public bool Equals2(Vertex v1, Vertex v2, Vertex v3)
@@ -50,10 +52,10 @@ namespace qem
         //    return base.GetHashCode();
         //}
 
-        public Vector Normal()
+        public Vector3 Normal()
         {
-            Vector e1 = V2.Vector - V1.Vector;
-            Vector e2 = V3.Vector - V1.Vector;
+            Vector3 e1 = V2.Vector3 - V1.Vector3;
+            Vector3 e2 = V3.Vector3 - V1.Vector3;
             return e1.Cross(e2).Normalize();
         }
     }

@@ -1,6 +1,7 @@
 using System;
 using System.Collections.Generic;
 using System.Linq;
+using System.Numerics;
 
 namespace qem
 {
@@ -12,7 +13,7 @@ namespace qem
 
         public Pair(Vertex a, Vertex b)
         {
-            if (a.Vector < b.Vector)
+            if (a.Vector3.Less(b.Vector3))
             {
                 (a, b) = (b, a);
             }
@@ -22,7 +23,7 @@ namespace qem
             Removed = false;
         }
 
-        public Vector Vector()
+        public Vector3 Vector()
         {
             var q = Quadric();
 
@@ -36,15 +37,15 @@ namespace qem
             //cannot compute best vector with matrix 
             // look for vest along edge
             int n = 32;
-            var a = A.Vector;
-            var b = B.Vector;
+            var a = A.Vector3;
+            var b = B.Vector3;
             var bestE = -1d;
-            var bestV = new Vector();
+            var bestV = new Vector3();
 
             for (int i = 0; i < n; i++)
             {
                 int frac = i * (1 / n);
-                var v = qem.Vector.Lerp(a, b, frac);
+                var v = Vector3.Lerp(a, b, frac);
                 var e = A.Quadric.QuadricError(v);
                 if (bestE < 0 || e < bestE)
                 {
@@ -71,8 +72,8 @@ namespace qem
 
         public record Key
         {
-            public Vector A, B;
-            public Key(Vector a, Vector b)
+            public Vector3 A, B;
+            public Key(Vector3 a, Vector3 b)
             {
                 A = a;
                 B = b;
@@ -80,11 +81,11 @@ namespace qem
 
             public static Key Make(Vertex a, Vertex b)
             {
-                if (a.Vector < b.Vector)
+                if (a.Vector3.Less(b.Vector3))
                 {
-                    return new Key(a.Vector, b.Vector);
+                    return new Key(a.Vector3, b.Vector3);
                 }
-                return new Key(b.Vector, a.Vector);
+                return new Key(b.Vector3, a.Vector3);
             }
         }
     }

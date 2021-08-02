@@ -1,3 +1,5 @@
+using System.Numerics;
+
 namespace qem
 {
     public struct Matrix
@@ -49,7 +51,7 @@ namespace qem
 
     public static class MatrixEx
     {
-        public static float QuadricError(this Matrix a, Vector v)
+        public static float QuadricError(this Matrix a, Vector3 v)
         {
             return (v.X * a.x00 * v.X + v.Y * a.x10 * v.X + v.Z * a.x20 * v.X + a.x30 * v.X +
                v.X * a.x01 * v.Y + v.Y * a.x11 * v.Y + v.Z * a.x21 * v.Y + a.x31 * v.Y +
@@ -57,7 +59,7 @@ namespace qem
                v.X * a.x03 + v.Y * a.x13 + v.Z * a.x23 + a.x33);
         }
 
-        public static Vector QuadricVector(this Matrix a)
+        public static Vector3 QuadricVector(this Matrix a)
         {
             var m = new Matrix(
                 a.x00, a.x01, a.x02, a.x03,
@@ -65,7 +67,7 @@ namespace qem
                 a.x20, a.x21, a.x22, a.x23,
                 0, 0, 0, 1);
 
-            return m.Inverse().MulPosition(new Vector());
+            return m.Inverse().MulPosition(new Vector3());
         }
 
         public static Matrix Add(this Matrix a, Matrix b)
@@ -117,9 +119,9 @@ namespace qem
                 a.x03 * a.x12 * a.x20 * a.x31 + a.x03 * a.x12 * a.x21 * a.x30);
         }
 
-        public static Vector MulPosition(this Matrix a, Vector b)
+        public static Vector3 MulPosition(this Matrix a, Vector3 b)
         {
-            return new Vector(
+            return new Vector3(
                 a.x00 * b.X + a.x01 * b.Y + a.x02 * b.Z + a.x03,
                 a.x10 * b.X + a.x11 * b.Y + a.x12 * b.Z + a.x13,
                 a.x20 * b.X + a.x21 * b.Y + a.x22 * b.Z + a.x23);

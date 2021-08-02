@@ -1,19 +1,21 @@
+using System.Numerics;
+
 namespace qem
 {
     public class Vertex
     {
-        public Vector Vector;
+        public Vector3 Vector3;
         public Matrix Quadric;
 
-        public Vertex(Vector v)
+        public Vertex(Vector3 v)
         {
-            Vector = v;
+            Vector3 = v;
             Quadric = new Matrix();
         }
 
-        public Vertex(Vector v, Matrix q)
+        public Vertex(Vector3 v, Matrix q)
         {
-            Vector = v;
+            Vector3 = v;
             Quadric = q;
         }
     }
