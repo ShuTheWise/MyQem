@@ -12,7 +12,7 @@
 
   <PropertyGroup>
     <OutputType>Exe</OutputType>
-    <TargetFramework>netcoreapp2.1</TargetFramework>
+    <TargetFramework>net5.0</TargetFramework>
 
     <PackAsTool>true</PackAsTool>
     <ToolCommandName>qem</ToolCommandName>
