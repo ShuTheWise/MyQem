@@ -1,8 +1,8 @@
 ﻿<Project Sdk="Microsoft.NET.Sdk">
 
   <ItemGroup>
-    <PackageReference Include="IxMilia.Stl" Version="0.1.1" />
-    <PackageReference Include="OptimizedPriorityQueue" Version="4.2.0" />
+    <PackageReference Include="IxMilia.Stl" Version="0.1.2" />
+    <PackageReference Include="OptimizedPriorityQueue" Version="5.1.0" />
   </ItemGroup>
 
   <PropertyGroup>

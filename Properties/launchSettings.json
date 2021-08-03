@@ -2,7 +2,7 @@
   "profiles": {
     "qem": {
       "commandName": "Project",
-      "commandLineArgs": "E:\\Perso\\data\\qem\\stefull.stl E:\\Perso\\data\\qem\\ste_out.stl  -q 0,2"
+      "commandLineArgs": "E:\\Perso\\data\\qem\\ste5.stl E:\\Perso\\data\\qem\\ste5v2_out.stl  -q 0,3"
     }
   }
 }
