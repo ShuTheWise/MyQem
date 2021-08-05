@@ -14,7 +14,7 @@ namespace qem
                 dic.Add(v, new Vertex(v));
         }
 
-        private static int CompFloats(double f, double f2)
+        private static int CompFloats(float f, float f2)
         {
             return (f > f2) ? 1 : -1;
         }
@@ -86,7 +86,7 @@ namespace qem
                 vertexPairs.AppendEx(p.Value.B, p.Value);
             }
 
-            var priorityQueue = new SimplePriorityQueue<Pair, double>(CompFloats);
+            var priorityQueue = new SimplePriorityQueue<Pair, float>(CompFloats);
             foreach (KeyValuePair<Pair.Key, Pair> item in pairs)
             {
                 item.Value.Error();
