@@ -1,4 +1,5 @@
 using System.IO;
+using System.Numerics;
 using IxMilia.Stl;
 
 namespace qem
@@ -15,9 +16,9 @@ namespace qem
             );
         }
 
-        private static Vector FromSTLVertex(StlVertex stlVertex)
+        private static Vector3 FromSTLVertex(StlVertex stlVertex)
         {
-            return new Vector(stlVertex.X, stlVertex.Y, stlVertex.Z);
+            return new Vector3(stlVertex.X, stlVertex.Y, stlVertex.Z);
         }
 
         private static StlTriangle ToSTLTriangle(Triangle triangle)
@@ -32,7 +33,7 @@ namespace qem
                 );
         }
 
-        private static StlVertex ToSTLVertex(Vector vector)
+        private static StlVertex ToSTLVertex(Vector3 vector)
         {
             return new StlVertex((float)vector.X, (float)vector.Y, (float)vector.Z);
         }

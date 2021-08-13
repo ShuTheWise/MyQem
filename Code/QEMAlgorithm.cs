@@ -2,18 +2,19 @@
 using System;
 using System.Collections.Generic;
 using System.Linq;
+using System.Numerics;
 
 namespace qem
 {
     public static class QEMAlgorithm
     {
-        private static void AddVertex(Vector v, Dictionary<Vector, Vertex> dic)
+        private static void AddVertex(Vector3 v, Dictionary<Vector3, Vertex> dic)
         {
             if (!dic.ContainsKey(v))
                 dic.Add(v, new Vertex(v));
         }
 
-        private static int CompFloats(double f, double f2)
+        private static int CompFloats(float f, float f2)
         {
             return (f > f2) ? 1 : -1;
         }
@@ -21,7 +22,7 @@ namespace qem
         public static Mesh Simplify(this Mesh originalMesh, int targetCount)
         {
             // gather distinct vertices
-            Dictionary<Vector, Vertex> vectorVertex = new Dictionary<Vector, Vertex>();
+            Dictionary<Vector3, Vertex> vectorVertex = new Dictionary<Vector3, Vertex>(originalMesh.vertexCount);
 
             foreach (Triangle t in originalMesh.tris)
             {
@@ -45,7 +46,7 @@ namespace qem
             }
 
             //vertex -> face map
-            Dictionary<Vertex, List<Face>> vertexFaces = new Dictionary<Vertex, List<Face>>();
+            Dictionary<Vertex, List<Face>> vertexFaces = new Dictionary<Vertex, List<Face>>(originalMesh.vertexCount);
             foreach (Triangle t in originalMesh.tris)
             {
                 Vertex v1 = vectorVertex[t.v1];
@@ -61,7 +62,7 @@ namespace qem
 
             System.Diagnostics.Stopwatch sw = System.Diagnostics.Stopwatch.StartNew();
             //gather distinct pairs
-            Dictionary<Pair.Key, Pair> pairs = new Dictionary<Pair.Key, Pair>();
+            Dictionary<Pair.Key, Pair> pairs = new Dictionary<Pair.Key, Pair>(originalMesh.trisCount);
             foreach (Triangle t in originalMesh.tris)
             {
                 Vertex v1 = vectorVertex[t.v1];
@@ -77,7 +78,7 @@ namespace qem
             }
             Console.WriteLine($"total: {sw.ElapsedMilliseconds}");
 
-            Dictionary<Vertex, List<Pair>> vertexPairs = new Dictionary<Vertex, List<Pair>>();
+            Dictionary<Vertex, List<Pair>> vertexPairs = new Dictionary<Vertex, List<Pair>>(originalMesh.vertexCount);
 
             foreach (KeyValuePair<Pair.Key, Pair> p in pairs)
             {
@@ -85,7 +86,7 @@ namespace qem
                 vertexPairs.AppendEx(p.Value.B, p.Value);
             }
 
-            var priorityQueue = new SimplePriorityQueue<Pair, double>(CompFloats);
+            var priorityQueue = new SimplePriorityQueue<Pair, float>(CompFloats);
             foreach (KeyValuePair<Pair.Key, Pair> item in pairs)
             {
                 item.Value.Error();
@@ -211,7 +212,7 @@ namespace qem
                 if (vertexPairs.ContainsKey(p.B))
                     vertexPairs.Remove(p.B);
 
-                var seen = new Dictionary<Vector, bool>();
+                var seen = new Dictionary<Vector3, bool>();
 
                 foreach (var q in distintPairs)
                 {
@@ -232,15 +233,15 @@ namespace qem
                         (a, b) = (b, a);
                         // a = v
                     }
-                    if (seen.ContainsKey(b.Vector) && seen[b.Vector])
+                    if (seen.ContainsKey(b.Vector3) && seen[b.Vector3])
                     {
                         //ignore duplicates
                         continue;
                     }
-                    if (!seen.ContainsKey(b.Vector))
-                        seen.Add(b.Vector, true);
+                    if (!seen.ContainsKey(b.Vector3))
+                        seen.Add(b.Vector3, true);
                     else
-                        seen[b.Vector] = true;
+                        seen[b.Vector3] = true;
 
                     var np = new Pair(a, b);
                     np.Error();
@@ -268,7 +269,7 @@ namespace qem
             //create final mesh
             Mesh newMesh = new Mesh
             {
-                tris = finalDistinctFaces.Select(x => new Triangle(x.V1.Vector, x.V2.Vector, x.V3.Vector)).ToArray()
+                tris = finalDistinctFaces.Select(x => new Triangle(x.V1.Vector3, x.V2.Vector3, x.V3.Vector3)).ToArray()
             };
 
             return newMesh;
